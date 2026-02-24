@@ -63,6 +63,7 @@ textarea:focus {
   display: none;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 .modal-content {
@@ -70,6 +71,7 @@ textarea:focus {
   padding: 30px;
   border-radius: var(--border-radius);
   width: 400px;
+  max-width: 95%;
 }
 
 .modal.show {
@@ -98,17 +100,29 @@ textarea:focus {
   margin-left: 20px;
 }
 
-.btn {
-  padding: 6px 12px;
-  border-radius: 5px;
-  font-size: 14px;
-  text-decoration: none;
-  transition: 0.3s ease;
+/* ===== BUTTON VARIANTS ===== */
+.btn-primary {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: var(--white);
+}
+
+.btn-secondary:hover {
+  opacity: 0.9;
 }
 
 .btn-outline {
   border: 1px solid var(--primary);
   color: var(--primary);
+  background: transparent;
 }
 
 .btn-outline:hover {
@@ -116,12 +130,7 @@ textarea:focus {
   color: #fff;
 }
 
-.btn-primary {
-  background: var(--primary);
-  color: #fff;
-  border: 1px solid var(--primary);
-}
-
-.btn-primary:hover {
-  opacity: 0.9;
+.btn-danger {
+  background: var(--danger);
+  color: var(--white);
 }

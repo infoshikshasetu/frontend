@@ -32,7 +32,8 @@ class AuthService {
     }
 
     static getUser() {
-        return JSON.parse(localStorage.getItem(CONFIG.USER_KEY));
+        const user = localStorage.getItem(CONFIG.USER_KEY);
+        return user ? JSON.parse(user) : null;
     }
 
     static isAuthenticated() {
@@ -42,6 +43,14 @@ class AuthService {
     static protectPage(redirectTo = "/index.html") {
         if (!this.isAuthenticated()) {
             window.location.href = redirectTo;
+        }
+    }
+
+    // ✅ Role-based access control
+    static requireRole(role, redirect = "/index.html") {
+        const user = this.getUser();
+        if (!user || user.role !== role) {
+            window.location.href = redirect;
         }
     }
 }

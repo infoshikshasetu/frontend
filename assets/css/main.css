@@ -64,7 +64,7 @@ a:hover {
   color: var(--primary-dark);
 }
 
-/* ===== BUTTON BASE ===== */
+/* ===== BUTTON BASE (ONLY STRUCTURE HERE) ===== */
 .btn {
   display: inline-block;
   padding: 10px 20px;
@@ -73,23 +73,5 @@ a:hover {
   cursor: pointer;
   transition: var(--transition);
   border: none;
-}
-
-.btn-primary {
-  background: var(--primary);
-  color: var(--white);
-}
-
-.btn-primary:hover {
-  background: var(--primary-dark);
-}
-
-.btn-secondary {
-  background: var(--secondary);
-  color: var(--white);
-}
-
-.btn-danger {
-  background: var(--danger);
-  color: var(--white);
+  text-align: center;
 }

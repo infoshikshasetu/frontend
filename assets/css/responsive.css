@@ -17,6 +17,7 @@
 }
 
 @media (max-width: 768px) {
+
   h1 { font-size: 2rem; }
   h2 { font-size: 1.5rem; }
 
@@ -27,19 +28,18 @@
   .modal-content {
     width: 90%;
   }
-}
 
-@media (max-width: 480px) {
-  .btn {
-    width: 100%;
-    text-align: center;
-  }
-}@media (max-width: 768px) {
   .navbar .container {
     flex-direction: column;
   }
 
   .hero h1 {
     font-size: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn {
+    width: 100%;
   }
 }

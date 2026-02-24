@@ -1,49 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Courses | ShikshaSetu</title>
-  <meta name="description" content="Browse all available courses on ShikshaSetu.">
+  <meta name="description" content="Browse all available courses on ShikshaSetu. Learn from expert mentors and upgrade your skills today.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- ✅ Canonical URL -->
+  <link rel="canonical" href="https://shikshasetu.online/courses">
+
+  <!-- ✅ Open Graph (For social sharing) -->
+  <meta property="og:title" content="Courses | ShikshaSetu">
+  <meta property="og:description" content="Browse all available courses on ShikshaSetu.">
+  <meta property="og:url" content="https://shikshasetu.online/courses">
+  <meta property="og:type" content="website">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/layout.css">
   <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
-<body>
-
-<div id="navbar-placeholder"></div>
-
-<section class="section">
-  <div class="container">
-    <h2>All Courses</h2>
-    <div id="coursesContainer" style="margin-top:30px; display:grid; gap:20px;"></div>
-  </div>
-</section>
-
-<div id="footer-placeholder"></div>
-<div id="modal-placeholder"></div>
-
-<script src="assets/js/config.js"></script>
-<script src="assets/js/api.js"></script>
-<script src="assets/js/auth.js"></script>
-<script src="assets/js/courses.js"></script>
-
-<script>
-async function loadComponent(id, file) {
-  const res = await fetch(file);
-  document.getElementById(id).innerHTML = await res.text();
-}
-
-loadComponent("navbar-placeholder", "/components/navbar.html");
-loadComponent("footer-placeholder", "/components/footer.html");
-loadComponent("modal-placeholder", "/components/modals.html");
-
-document.addEventListener("DOMContentLoaded", function(){
-  CourseService.renderCourses("coursesContainer");
-});
-</script>
-
-</body>
-</html>

@@ -7,12 +7,24 @@ RewriteEngine On
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Prevent access to sensitive files
+# Remove .html extension from URL
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# Protect sensitive files
 <FilesMatch "\.(env|log|ini|htaccess)$">
-    Order allow,deny
-    Deny from all
+    Require all denied
 </FilesMatch>
 
-# Redirect to login if accessing dashboard directly without auth
+# Block direct access to dashboard without login (frontend redirect)
 RewriteCond %{REQUEST_URI} ^/student/dashboard
-RewriteRule ^(.*)$ login.html [R=302,L]
+RewriteRule ^ login.html [R=302,L]
+
+# Security Headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

@@ -58,7 +58,7 @@
 requireMentor();
 
 async function loadDashboard() {
-    const response = await apiRequest('/mentor/dashboard', 'GET', null, true);
+    const response = await ApiRequest.get('/mentor/dashboard', true);
 
     if (response.success) {
         document.getElementById('totalCourses').innerText = response.data.total_courses;
