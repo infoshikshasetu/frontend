@@ -1,70 +1,95 @@
-/* ========== SHIKSHASETU DESIGN SYSTEM ========== */
+/* ================================
+   SHIKSHASETU - MAIN STYLES
+   Global Variables + Reset + Base
+================================= */
 
+/* ===== CSS VARIABLES ===== */
 :root {
   --primary: #2563eb;
   --primary-dark: #1e40af;
-  --secondary: #0f172a;
-  --accent: #f59e0b;
-  --light: #f8fafc;
-  --gray: #64748b;
+  --secondary: #f59e0b;
   --success: #10b981;
   --danger: #ef4444;
-  --radius: 12px;
-  --shadow: 0 10px 25px rgba(0,0,0,0.05);
+  --dark: #0f172a;
+  --gray-dark: #334155;
+  --gray: #64748b;
+  --gray-light: #f1f5f9;
+  --white: #ffffff;
+
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
+  --container-width: 1200px;
 }
 
+/* ===== RESET ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
 }
 
+/* ===== BODY ===== */
 body {
-  background: var(--light);
-  color: var(--secondary);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: var(--gray-light);
+  color: var(--dark);
+  line-height: 1.6;
 }
 
+/* ===== CONTAINER ===== */
 .container {
-  width: 90%;
-  max-width: 1200px;
+  max-width: var(--container-width);
   margin: auto;
+  padding: 0 20px;
 }
 
+/* ===== HEADINGS ===== */
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+  color: var(--dark);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+/* ===== LINKS ===== */
+a {
+  text-decoration: none;
+  color: var(--primary);
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--primary-dark);
+}
+
+/* ===== BUTTON BASE ===== */
 .btn {
   display: inline-block;
-  padding: 12px 20px;
-  border-radius: var(--radius);
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.3s;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
 }
 
 .btn-primary {
   background: var(--primary);
-  color: white;
+  color: var(--white);
 }
 
 .btn-primary:hover {
   background: var(--primary-dark);
 }
 
-.section {
-  padding: 80px 0;
+.btn-secondary {
+  background: var(--secondary);
+  color: var(--white);
 }
 
-.card {
-  background: white;
-  padding: 20px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 12px;
-  border-radius: var(--radius);
-  border: 1px solid #ddd;
-  margin-top: 6px;
-  margin-bottom: 16px;
+.btn-danger {
+  background: var(--danger);
+  color: var(--white);
 }

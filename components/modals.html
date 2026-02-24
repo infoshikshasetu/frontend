@@ -1,0 +1,60 @@
+<!-- =================================
+     SHIKSHASETU MODALS
+================================== -->
+
+<!-- Loading Modal -->
+<div class="modal" id="loadingModal">
+  <div class="modal-content" style="text-align:center;">
+    <p>Processing...</p>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal" id="successModal">
+  <div class="modal-content">
+    <h3>Success</h3>
+    <p id="successMessage"></p>
+    <button class="btn btn-primary" onclick="closeModal('successModal')">
+      OK
+    </button>
+  </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal" id="errorModal">
+  <div class="modal-content">
+    <h3>Error</h3>
+    <p id="errorMessage"></p>
+    <button class="btn btn-danger" onclick="closeModal('errorModal')">
+      Close
+    </button>
+  </div>
+</div>
+
+<script>
+/* ================================
+   MODAL UTILITIES
+================================= */
+
+function showLoading() {
+  document.getElementById("loadingModal").classList.add("show");
+}
+
+function hideLoading() {
+  document.getElementById("loadingModal").classList.remove("show");
+}
+
+function showSuccess(message) {
+  document.getElementById("successMessage").textContent = message;
+  document.getElementById("successModal").classList.add("show");
+}
+
+function showError(message) {
+  document.getElementById("errorMessage").textContent = message;
+  document.getElementById("errorModal").classList.add("show");
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove("show");
+}
+</script>

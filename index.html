@@ -1,27 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>ShikshaSetu | Learn & Teach Online</title>
+  <meta charset="UTF-8">
+  <title>ShikshaSetu - Learn & Teach Online</title>
+  <meta name="description" content="Join ShikshaSetu to learn from expert mentors or teach students worldwide.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
 <body>
 
-  <!-- Navbar -->
-  <?php include 'components/navbar.html'; ?>
+<div id="navbar-placeholder"></div>
 
-  <section class="section">
-    <div class="container">
-      <h1>Empowering Education Through Technology</h1>
-      <p style="margin-top:15px;">
-        Join thousands of students and mentors across India.
-      </p>
-      <br>
-      <a href="courses.html" class="btn btn-primary">Explore Courses</a>
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <h1>Empowering Education Through Technology</h1>
+    <p>Connect with expert mentors and unlock your learning potential.</p>
+    <a href="/courses.html" class="btn btn-secondary">Explore Courses</a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="container section-title">
+    <h2>Why Choose ShikshaSetu?</h2>
+  </div>
+
+  <div class="container" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px;">
+    <div class="card">
+      <h3>Expert Mentors</h3>
+      <p>Learn from industry professionals.</p>
     </div>
-  </section>
+    <div class="card">
+      <h3>Flexible Learning</h3>
+      <p>Study anytime, anywhere.</p>
+    </div>
+    <div class="card">
+      <h3>Certified Courses</h3>
+      <p>Earn certificates to boost your career.</p>
+    </div>
+  </div>
+</section>
 
-  <?php include 'components/footer.html'; ?>
+<div id="footer-placeholder"></div>
+<div id="modal-placeholder"></div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/auth.js"></script>
+<script>
+async function loadComponent(id, file) {
+  const res = await fetch(file);
+  document.getElementById(id).innerHTML = await res.text();
+}
+loadComponent("navbar-placeholder", "/components/navbar.html");
+loadComponent("footer-placeholder", "/components/footer.html");
+loadComponent("modal-placeholder", "/components/modals.html");
+</script>
 
 </body>
 </html>

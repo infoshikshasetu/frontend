@@ -1,18 +1,47 @@
-async function loginUser(email, password) {
-  try {
-    const res = await apiRequest("/student/login", "POST", {
-      email,
-      password
-    });
+/* =================================
+   SHIKSHASETU AUTH SYSTEM
+================================= */
 
-    if (res.success) {
-      localStorage.setItem("token", res.token);
-      window.location.href = "/student/dashboard/index.html";
-    } else {
-      alert(res.message);
+class AuthService {
+
+    static async login(endpoint, email, password) {
+        try {
+            const response = await ApiService.post(endpoint, {
+                email,
+                password
+            });
+
+            localStorage.setItem(CONFIG.TOKEN_KEY, response.token);
+            localStorage.setItem(CONFIG.USER_KEY, JSON.stringify(response.user));
+
+            return response;
+
+        } catch (error) {
+            throw error;
+        }
     }
 
-  } catch (error) {
-    alert("Server error");
-  }
+    static logout() {
+        localStorage.removeItem(CONFIG.TOKEN_KEY);
+        localStorage.removeItem(CONFIG.USER_KEY);
+        window.location.href = "/index.html";
+    }
+
+    static getToken() {
+        return localStorage.getItem(CONFIG.TOKEN_KEY);
+    }
+
+    static getUser() {
+        return JSON.parse(localStorage.getItem(CONFIG.USER_KEY));
+    }
+
+    static isAuthenticated() {
+        return !!this.getToken();
+    }
+
+    static protectPage(redirectTo = "/index.html") {
+        if (!this.isAuthenticated()) {
+            window.location.href = redirectTo;
+        }
+    }
 }

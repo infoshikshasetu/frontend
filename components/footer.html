@@ -1,5 +1,52 @@
-<div class="footer">
+<!-- =================================
+     SHIKSHASETU FOOTER COMPONENT
+================================== -->
+
+<footer class="footer">
   <div class="container">
-    <p>© 2026 ShikshaSetu. All rights reserved.</p>
+
+    <div class="footer-grid">
+
+      <!-- About -->
+      <div>
+        <h3>ShikshaSetu</h3>
+        <p>
+          Connecting mentors and students through high-quality online education.
+          Learn. Teach. Grow.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/courses.html">Courses</a></li>
+          <li><a href="/mentors.html">Mentors</a></li>
+          <li><a href="/about.html">About Us</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="/terms.html">Terms & Conditions</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <hr style="margin:30px 0; opacity:0.2;">
+
+    <p style="text-align:center;">
+      © <span id="year"></span> ShikshaSetu. All Rights Reserved.
+    </p>
+
   </div>
-</div>
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>

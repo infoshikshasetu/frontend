@@ -1,13 +1,71 @@
-<div class="navbar">
+<!-- =================================
+     SHIKSHASETU NAVBAR COMPONENT
+================================== -->
+
+<header class="navbar">
   <div class="container">
-    <h2>ShikshaSetu</h2>
-    <div class="nav-links">
-      <a href="/">Home</a>
+
+    <!-- Logo -->
+    <a href="/index.html" class="logo">
+      <strong>ShikshaSetu</strong>
+    </a>
+
+    <!-- Navigation Links -->
+    <nav class="nav-links" id="navLinks">
+      <a href="/index.html">Home</a>
       <a href="/courses.html">Courses</a>
       <a href="/mentors.html">Mentors</a>
       <a href="/about.html">About</a>
       <a href="/contact.html">Contact</a>
-      <a href="/mentor/login.html" class="btn btn-primary">Become Mentor</a>
-    </div>
+
+      <!-- Dynamic Auth Links -->
+      <span id="authLinks"></span>
+    </nav>
+
   </div>
-</div>
+</header>
+
+<script>
+/* ================================
+   NAVBAR AUTH LOGIC
+================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const authContainer = document.getElementById("authLinks");
+
+  if (!authContainer) return;
+
+  const token = localStorage.getItem("shikshasetu_token");
+  const user = JSON.parse(localStorage.getItem("shikshasetu_user"));
+
+  if (token && user) {
+
+    let dashboardLink = "/student/dashboard/index.html";
+
+    if (user.role === "mentor") {
+      dashboardLink = "/mentor/dashboard/index.html";
+    }
+
+    authContainer.innerHTML = `
+      <a href="${dashboardLink}">Dashboard</a>
+      <a href="#" id="logoutBtn">Logout</a>
+    `;
+
+    document.getElementById("logoutBtn").addEventListener("click", function (e) {
+      e.preventDefault();
+      localStorage.removeItem("shikshasetu_token");
+      localStorage.removeItem("shikshasetu_user");
+      window.location.href = "/index.html";
+    });
+
+  } else {
+
+    authContainer.innerHTML = `
+      <a href="/student/login.html">Student Login</a>
+      <a href="/mentor/login.html">Mentor Login</a>
+    `;
+  }
+
+});
+</script>
