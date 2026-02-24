@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mentor Login | ShikshaSetu</title>
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+
+<div class="container section">
+  <div class="card" style="max-width:420px;margin:auto;">
+    <h2>Mentor Login</h2>
+
+    <form onsubmit="mentorLogin(event)">
+      <label>Email</label>
+      <input type="email" id="email" required>
+
+      <label>Password</label>
+      <input type="password" id="password" required>
+
+      <button class="btn btn-primary" style="width:100%;">Login</button>
+    </form>
+
+    <p style="margin-top:15px;">
+      Don't have account?
+      <a href="register.html">Register</a>
+    </p>
+  </div>
+</div>
+
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/api.js"></script>
+<script>
+async function mentorLogin(e){
+  e.preventDefault();
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const res = await apiRequest("/mentor/login","POST",{email,password});
+
+  if(res.success){
+    localStorage.setItem("mentorToken",res.token);
+    window.location.href = "dashboard/index.html";
+  }else{
+    alert(res.message || "Login failed");
+  }
+}
+</script>
+
+</body>
+</html>
