@@ -3,7 +3,7 @@
 ================================== -->
 
 <header class="navbar">
-  <div class="container">
+  <div class="container navbar-container">
 
     <!-- Logo -->
     <a href="/index.html" class="logo">
@@ -19,7 +19,9 @@
       <a href="/contact.html">Contact</a>
 
       <!-- Dynamic Auth Links -->
-      <span id="authLinks"></span>
+      <div class="auth-section">
+        <span id="authLinks"></span>
+      </div>
     </nav>
 
   </div>
@@ -48,8 +50,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     authContainer.innerHTML = `
-      <a href="${dashboardLink}">Dashboard</a>
-      <a href="#" id="logoutBtn">Logout</a>
+      <a href="${dashboardLink}" class="btn btn-primary">Dashboard</a>
+      <a href="#" id="logoutBtn" class="btn btn-outline">Logout</a>
     `;
 
     document.getElementById("logoutBtn").addEventListener("click", function (e) {
@@ -62,8 +64,10 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
 
     authContainer.innerHTML = `
-      <a href="/student/login.html">Student Login</a>
-      <a href="/mentor/login.html">Mentor Login</a>
+      <a href="/student/login.html" class="btn btn-outline">Student Login</a>
+      <a href="/student/register.html" class="btn btn-primary">Student Register</a>
+      <a href="/mentor/login.html" class="btn btn-outline">Mentor Login</a>
+      <a href="/mentor/register.html" class="btn btn-primary">Mentor Register</a>
     `;
   }
 
