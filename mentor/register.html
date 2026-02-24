@@ -1,32 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Mentor Register | ShikshaSetu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
 </head>
 <body>
 
-<div class="container section">
-  <div class="card" style="max-width:500px;margin:auto;">
-    <h2>Mentor Registration</h2>
+<div id="navbar-placeholder"></div>
 
-    <form>
-      <label>Full Name</label>
-      <input type="text" required>
+<section class="section">
+  <div class="container" style="max-width:500px;">
+    <h2>Create Mentor Account</h2>
 
-      <label>Email</label>
-      <input type="email" required>
+    <form id="mentorRegisterForm">
 
-      <label>Password</label>
-      <input type="password" required>
+      <div class="form-group">
+        <input type="text" id="name" placeholder="Full Name" required>
+      </div>
 
-      <label>Expertise</label>
-      <input type="text">
+      <div class="form-group">
+        <input type="email" id="email" placeholder="Email" required>
+      </div>
 
-      <button class="btn btn-primary" style="width:100%;">Register</button>
+      <div class="form-group">
+        <input type="password" id="password" placeholder="Password" required>
+      </div>
+
+      <button type="submit" class="btn btn-secondary">Register</button>
+
     </form>
   </div>
-</div>
+</section>
+
+<div id="footer-placeholder"></div>
+<div id="modal-placeholder"></div>
+
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/api.js"></script>
+<script src="../assets/js/auth.js"></script>
+
+<script>
+document.getElementById("mentorRegisterForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+
+  showLoading();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  try {
+    await ApiService.post("/mentor/register", {
+      name,
+      email,
+      password
+    });
+
+    hideLoading();
+    showSuccess("Registration successful! Please login.");
+
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 1500);
+
+  } catch (error) {
+    hideLoading();
+    showError(error.message);
+  }
+});
+
+async function loadComponent(id, file) {
+  const res = await fetch(file);
+  document.getElementById(id).innerHTML = await res.text();
+}
+
+loadComponent("navbar-placeholder", "/components/navbar.html");
+loadComponent("footer-placeholder", "/components/footer.html");
+loadComponent("modal-placeholder", "/components/modals.html");
+</script>
 
 </body>
 </html>

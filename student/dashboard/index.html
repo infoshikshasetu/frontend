@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Dashboard | ShikshaSetu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/layout.css">
+<link rel="stylesheet" href="../../assets/css/components.css">
+<link rel="stylesheet" href="../../assets/css/responsive.css">
+
+<script src="../../assets/js/config.js"></script>
+<script src="../../assets/js/api.js"></script>
+<script src="../../assets/js/auth.js"></script>
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+<aside class="sidebar">
+<h2>Student Panel</h2>
+<ul>
+<li><a href="index.html" class="active">Dashboard</a></li>
+<li><a href="my-courses.html">My Courses</a></li>
+<li><a href="certificates.html">Certificates</a></li>
+<li><a href="payments.html">Payments</a></li>
+<li><a href="profile.html">Profile</a></li>
+<li><a href="../index.html">Back to Site</a></li>
+<li><a href="#" onclick="logoutStudent()">Logout</a></li>
+</ul>
+</aside>
+
+<main class="dashboard-content">
+<h1>Welcome Back 👋</h1>
+
+<div class="stats-grid">
+<div class="card">
+<h3>Enrolled Courses</h3>
+<p id="totalCourses">0</p>
+</div>
+
+<div class="card">
+<h3>Completed Courses</h3>
+<p id="completedCourses">0</p>
+</div>
+
+<div class="card">
+<h3>Total Payments</h3>
+<p>₹ <span id="totalPayments">0</span></p>
+</div>
+</div>
+
+</main>
+</div>
+
+<script>
+requireStudent();
+
+async function loadDashboard(){
+const response = await apiRequest('/student/dashboard','GET',null,true);
+
+if(response.success){
+document.getElementById('totalCourses').innerText = response.data.total_courses;
+document.getElementById('completedCourses').innerText = response.data.completed_courses;
+document.getElementById('totalPayments').innerText = response.data.total_payments;
+}
+}
+
+function logoutStudent(){
+localStorage.removeItem('student_token');
+window.location.href = "../login.html";
+}
+
+loadDashboard();
+</script>
+
+</body>
+</html>

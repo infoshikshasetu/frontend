@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Profile | Student</title>
+
+<link rel="stylesheet" href="../../assets/css/main.css">
+<script src="../../assets/js/config.js"></script>
+<script src="../../assets/js/api.js"></script>
+<script src="../../assets/js/auth.js"></script>
+</head>
+
+<body>
+
+<h1>My Profile</h1>
+
+<form id="profileForm">
+<input type="text" id="name" placeholder="Full Name">
+<input type="email" id="email" placeholder="Email">
+<button type="submit">Update Profile</button>
+</form>
+
+<script>
+requireStudent();
+
+async function loadProfile(){
+const response = await apiRequest('/student/profile','GET',null,true);
+
+if(response.success){
+document.getElementById('name').value = response.data.name;
+document.getElementById('email').value = response.data.email;
+}
+}
+
+document.getElementById('profileForm').addEventListener('submit', async function(e){
+e.preventDefault();
+
+const data = {
+name: document.getElementById('name').value,
+email: document.getElementById('email').value
+};
+
+const response = await apiRequest('/student/update-profile','POST',data,true);
+
+if(response.success){
+alert("Profile updated successfully");
+}
+});
+
+loadProfile();
+</script>
+
+</body>
+</html>

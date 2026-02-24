@@ -1,31 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Student Login | ShikshaSetu</title>
-  <link rel="stylesheet" href="../assets/css/main.css">
+    <meta charset="UTF-8">
+    <title>Student Login | ShikshaSetu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+
+    <script src="../../assets/js/config.js"></script>
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/auth.js"></script>
 </head>
 <body>
 
-<div class="container section">
-  <div class="card" style="max-width:400px;margin:auto;">
-    <h2>Student Login</h2>
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>Student Login</h2>
 
-    <form>
-      <label>Email</label>
-      <input type="email" required>
+        <form id="studentLoginForm">
+            <input type="email" id="email" placeholder="Email Address" required>
+            <input type="password" id="password" placeholder="Password" required>
 
-      <label>Password</label>
-      <input type="password" required>
+            <button type="submit" class="btn-primary">Login</button>
+        </form>
 
-      <button class="btn btn-primary" style="width:100%;">Login</button>
-    </form>
-
-    <p style="margin-top:15px;">
-      Don't have account?
-      <a href="register.html">Register</a>
-    </p>
-  </div>
+        <p>Don't have an account? <a href="register.html">Register</a></p>
+        <p><a href="../index.html">← Back to Website</a></p>
+    </div>
 </div>
+
+<script>
+if (localStorage.getItem('student_token')) {
+    window.location.href = "dashboard/index.html";
+}
+
+document.getElementById('studentLoginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const data = {
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value
+    };
+
+    const response = await apiRequest('/student/login', 'POST', data);
+
+    if (response.success) {
+        localStorage.setItem('student_token', response.token);
+        window.location.href = "dashboard/index.html";
+    } else {
+        alert(response.message || "Invalid credentials");
+    }
+});
+</script>
 
 </body>
 </html>

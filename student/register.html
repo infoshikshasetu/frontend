@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Register | ShikshaSetu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+
+    <script src="../../assets/js/config.js"></script>
+    <script src="../../assets/js/api.js"></script>
+</head>
+<body>
+
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>Create Student Account</h2>
+
+        <form id="studentRegisterForm">
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <input type="password" id="password" placeholder="Password (min 6 characters)" required>
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+
+            <button type="submit" class="btn-primary">Register</button>
+        </form>
+
+        <p>Already have an account? <a href="login.html">Login</a></p>
+        <p><a href="../index.html">← Back to Website</a></p>
+    </div>
+</div>
+
+<script>
+document.getElementById('studentRegisterForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match");
+        return;
+    }
+
+    const data = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        password: password
+    };
+
+    const response = await apiRequest('/student/register', 'POST', data);
+
+    if (response.success) {
+        alert("Registration successful! Please login.");
+        window.location.href = "login.html";
+    } else {
+        alert(response.message || "Registration failed");
+    }
+});
+</script>
+
+</body>
+</html>

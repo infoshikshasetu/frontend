@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Certificates | Student</title>
+
+<link rel="stylesheet" href="../../assets/css/main.css">
+<script src="../../assets/js/config.js"></script>
+<script src="../../assets/js/api.js"></script>
+<script src="../../assets/js/auth.js"></script>
+</head>
+
+<body>
+
+<h1>My Certificates</h1>
+<div id="certificatesContainer"></div>
+
+<script>
+requireStudent();
+
+async function loadCertificates(){
+const response = await apiRequest('/student/certificates','GET',null,true);
+
+if(response.success){
+const container = document.getElementById('certificatesContainer');
+response.data.forEach(cert=>{
+container.innerHTML += `
+<div class="card">
+<h3>${cert.course_title}</h3>
+<a href="${cert.download_url}" target="_blank" class="btn-primary">Download Certificate</a>
+</div>
+`;
+});
+}
+}
+
+loadCertificates();
+</script>
+
+</body>
+</html>

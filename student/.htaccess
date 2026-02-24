@@ -1,0 +1,18 @@
+# Disable directory listing
+Options -Indexes
+
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Prevent access to sensitive files
+<FilesMatch "\.(env|log|ini|htaccess)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Redirect to login if accessing dashboard directly without auth
+RewriteCond %{REQUEST_URI} ^/student/dashboard
+RewriteRule ^(.*)$ login.html [R=302,L]

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Payments | Student</title>
+
+<link rel="stylesheet" href="../../assets/css/main.css">
+<script src="../../assets/js/config.js"></script>
+<script src="../../assets/js/api.js"></script>
+<script src="../../assets/js/auth.js"></script>
+</head>
+
+<body>
+
+<h1>Payment History</h1>
+
+<table id="paymentsTable" border="1" cellpadding="10">
+<tr>
+<th>Course</th>
+<th>Amount</th>
+<th>Date</th>
+<th>Status</th>
+</tr>
+</table>
+
+<script>
+requireStudent();
+
+async function loadPayments(){
+const response = await apiRequest('/student/payments','GET',null,true);
+
+if(response.success){
+const table = document.getElementById('paymentsTable');
+
+response.data.forEach(payment=>{
+table.innerHTML += `
+<tr>
+<td>${payment.course}</td>
+<td>₹ ${payment.amount}</td>
+<td>${payment.date}</td>
+<td>${payment.status}</td>
+</tr>
+`;
+});
+}
+}
+
+loadPayments();
+</script>
+
+</body>
+</html>

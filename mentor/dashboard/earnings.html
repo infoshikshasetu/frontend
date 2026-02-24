@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Earnings</title>
-  <link rel="stylesheet" href="../../assets/css/main.css">
+    <title>Earnings</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <script src="../../assets/js/config.js"></script>
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/auth.js"></script>
 </head>
 <body>
 
-<div class="container section">
-  <h2>Earnings Overview</h2>
+<h1>Your Earnings</h1>
+<h2>Total: ₹ <span id="total"></span></h2>
 
-  <div class="card">
-    <p>Total Earnings: ₹ 45,000</p>
-    <p>Pending Payout: ₹ 5,000</p>
-  </div>
-</div>
+<script>
+requireMentor();
+
+async function loadEarnings() {
+    const response = await apiRequest('/mentor/earnings', 'GET', null, true);
+
+    if (response.success) {
+        document.getElementById('total').innerText = response.data.total;
+    }
+}
+
+loadEarnings();
+</script>
 
 </body>
 </html>

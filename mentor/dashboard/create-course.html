@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Course | Mentor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <script src="../../assets/js/config.js"></script>
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/auth.js"></script>
+</head>
+<body>
+
+<div class="dashboard-container">
+    <aside class="sidebar">
+        <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="create-course.html" class="active">Create Course</a></li>
+            <li><a href="my-courses.html">My Courses</a></li>
+            <li><a href="students.html">Students</a></li>
+            <li><a href="earnings.html">Earnings</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+    </aside>
+
+    <main class="dashboard-content">
+        <h1>Create New Course</h1>
+
+        <form id="courseForm">
+            <input type="text" id="title" placeholder="Course Title" required>
+            <textarea id="description" placeholder="Course Description" required></textarea>
+            <input type="number" id="price" placeholder="Price" required>
+            <button type="submit">Create Course</button>
+        </form>
+    </main>
+</div>
+
+<script>
+requireMentor();
+
+document.getElementById('courseForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const data = {
+        title: document.getElementById('title').value,
+        description: document.getElementById('description').value,
+        price: document.getElementById('price').value
+    };
+
+    const response = await apiRequest('/mentor/create-course', 'POST', data, true);
+
+    if (response.success) {
+        alert("Course created successfully!");
+        window.location.href = "my-courses.html";
+    } else {
+        alert(response.message);
+    }
+});
+</script>
+
+</body>
+</html>

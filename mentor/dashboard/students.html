@@ -1,19 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Students</title>
-  <link rel="stylesheet" href="../../assets/css/main.css">
+    <title>Enrolled Students</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <script src="../../assets/js/config.js"></script>
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/auth.js"></script>
 </head>
 <body>
 
-<div class="container section">
-  <h2>Enrolled Students</h2>
+<h1>My Students</h1>
+<table id="studentsTable"></table>
 
-  <div class="card">
-    <p>Rahul Sharma – Web Development</p>
-    <p>Anita Verma – Python Masterclass</p>
-  </div>
-</div>
+<script>
+requireMentor();
+
+async function loadStudents() {
+    const response = await apiRequest('/mentor/students', 'GET', null, true);
+
+    if (response.success) {
+        const table = document.getElementById('studentsTable');
+        response.data.forEach(student => {
+            table.innerHTML += `
+                <tr>
+                    <td>${student.name}</td>
+                    <td>${student.email}</td>
+                    <td>${student.course}</td>
+                </tr>
+            `;
+        });
+    }
+}
+
+loadStudents();
+</script>
 
 </body>
 </html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Courses | Student</title>
+
+<link rel="stylesheet" href="../../assets/css/main.css">
+<script src="../../assets/js/config.js"></script>
+<script src="../../assets/js/api.js"></script>
+<script src="../../assets/js/auth.js"></script>
+</head>
+
+<body>
+
+<h1>My Courses</h1>
+<div id="coursesContainer"></div>
+
+<script>
+requireStudent();
+
+async function loadCourses(){
+const response = await apiRequest('/student/my-courses','GET',null,true);
+
+if(response.success){
+const container = document.getElementById('coursesContainer');
+response.data.forEach(course=>{
+container.innerHTML += `
+<div class="card">
+<h3>${course.title}</h3>
+<p>${course.description}</p>
+<p>Status: ${course.status}</p>
+</div>
+`;
+});
+}
+}
+
+loadCourses();
+</script>
+
+</body>
+</html>
